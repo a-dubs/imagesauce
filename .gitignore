@@ -181,6 +181,7 @@ cover
 notes.md
 notes.txt
 *.log
+*.snap
 
 # OS image files
 *.img
@@ -188,4 +189,6 @@ notes.txt
 *.qcow2
 *.vhd
 *.vmdk
-
+*.vdi
+*.manifest
+*.filelist

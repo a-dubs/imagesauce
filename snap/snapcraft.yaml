@@ -4,17 +4,22 @@ summary: Wrapper around the Chimg CLI tool. One stop shop for customizing an ima
 description: |
   Wrapper around the Chimg CLI tool. One stop shop for customizing an image.
 version: git
-base: core24
+base: core22
 confinement: classic
 license: GPL-3.0
-issues: https://github.com/a-dubs/ImageSauce/issues
-website: https://github.com/a-dubs/ImageSauce
-source-code: https://github.com/a-dubs/ImageSauce
+issues: https://github.com/a-dubs/imagesauce/issues
+website: https://github.com/a-dubs/imagesauce
+source-code: https://github.com/a-dubs/imagesauce
 contact: alecwarren19@gmail.com
+
+environment:
+  PYTHONPATH: "$SNAP/lib/python3.10/site-packages:${PYTHONPATH}"
 
 apps:
   imagesauce:
-    command: bin/python $SNAP/bin/ImageSauce
+    command: bin/python $SNAP/bin/imagesauce
+    environment:
+      PATH: "$SNAP/bin:$SNAP/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 
 parts:
   imagesauce:
@@ -23,7 +28,7 @@ parts:
     # see https://forum.snapcraft.io/t/modulenotfounderror-exception-for-a-snap-built-in-classic-confinement-mode/31090
     override-build: |
       snapcraftctl build
-      ln -sf ../usr/bin/python3.12 $SNAPCRAFT_PART_INSTALL/bin/python3
+      ln -sf ../usr/bin/python3.10 $SNAPCRAFT_PART_INSTALL/bin/python3
     build-attributes:
       - enable-patchelf
     build-packages:
@@ -34,6 +39,7 @@ parts:
       - git
       - squashfs-tools
       - python3-venv
-      - python3.12-minimal
-      - libpython3.12-minimal
-      - libpython3.12-stdlib
+      - python3.10-minimal
+      - libpython3.10-minimal
+      - libpython3.10-stdlib
+      - python3-pip

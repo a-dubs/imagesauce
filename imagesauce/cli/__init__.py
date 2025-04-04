@@ -5,7 +5,7 @@ import sys
 import logging
 import argparse
 
-from ImageSauce.image_customizer import customize_image_entry_point
+from imagesauce.image_customizer import customize_image_entry_point
 
 logger = logging.getLogger(__name__)
 
@@ -28,7 +28,7 @@ def _parser():
 
     # example invocation:
     """
-    ImageSauce \
+    imagesauce \
         --log-level debug \
         --log-console \
         customize-image \

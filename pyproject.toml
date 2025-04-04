@@ -5,7 +5,7 @@ requires = ["setuptools>=42", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "ImageSauce"
+name = "imagesauce"
 version = "0.1.0"
 description = "Wrapper around the Chimg CLI tool. One stop shop for customizing an image."
 authors = [
@@ -45,11 +45,11 @@ test = [
 ############################# Setuptools configuration #########################
 
 [tool.setuptools]
-packages = ["ImageSauce"]  # List of modules to include in the distribution
+packages = ["imagesauce"]  # List of modules to include in the distribution
 
 [project.scripts]
 # Entry points for the package
-ImageSauce = "ImageSauce.cli.__init__:main"  # Path to the main function in the cli module
+imagesauce = "imagesauce.cli.__init__:main"  # Path to the main function in the cli module
 
 
 ############################# Mypy configuration ##############################

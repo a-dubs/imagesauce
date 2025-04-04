@@ -6,7 +6,7 @@ import logging
 from argparse import Namespace
 import sys
 from typing import Optional
-from ImageSauce import snap_seed_parse
+from imagesauce import snap_seed_parse
 from chimg.chroot import Chroot
 from chimg.context import Context
 
