@@ -1,4 +1,4 @@
-sudo ImageSauce \
+sudo imagesauce \
     --log-level debug \
     --log-console \
     customize-image \

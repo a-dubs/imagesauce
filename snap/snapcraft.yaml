@@ -23,7 +23,7 @@ parts:
     # see https://forum.snapcraft.io/t/modulenotfounderror-exception-for-a-snap-built-in-classic-confinement-mode/31090
     override-build: |
       snapcraftctl build
-      ln -sf ../usr/bin/python3.10 $SNAPCRAFT_PART_INSTALL/bin/python3
+      ln -sf ../usr/bin/python3.12 $SNAPCRAFT_PART_INSTALL/bin/python3
     build-attributes:
       - enable-patchelf
     build-packages:

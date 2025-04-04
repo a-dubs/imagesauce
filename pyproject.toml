@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ImageSauce"
-version = "0.0.1"
+version = "0.1.0"
 description = "Wrapper around the Chimg CLI tool. One stop shop for customizing an image."
 authors = [
     { name="a-dubs", email="alecwarren19@gmail.com" },
