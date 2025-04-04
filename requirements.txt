@@ -1,0 +1,1 @@
+chimg @ git+https://github.com/canonical/chimg@main

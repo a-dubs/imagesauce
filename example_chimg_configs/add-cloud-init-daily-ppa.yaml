@@ -1,0 +1,9 @@
+ppas:
+  - name: cloud-init-dev-daily-ppa
+    uri: https://ppa.launchpadcontent.net/cloud-init-dev/daily/ubuntu
+    suites:
+    - jammy
+    components:
+    - main
+    keep: true
+    fingerprint: 1FF0D8535EF7E719E5C81B9C083D06FBE4D304DF

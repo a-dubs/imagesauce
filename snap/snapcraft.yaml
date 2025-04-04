@@ -1,0 +1,39 @@
+---
+name: imagesauce
+summary: Wrapper around the Chimg CLI tool. One stop shop for customizing an image.
+description: |
+  Wrapper around the Chimg CLI tool. One stop shop for customizing an image.
+version: git
+base: core24
+confinement: classic
+license: GPL-3.0
+issues: https://github.com/a-dubs/ImageSauce/issues
+website: https://github.com/a-dubs/ImageSauce
+source-code: https://github.com/a-dubs/ImageSauce
+contact: alecwarren19@gmail.com
+
+apps:
+  imagesauce:
+    command: bin/python $SNAP/bin/ImageSauce
+
+parts:
+  imagesauce:
+    plugin: python
+    source: .
+    # see https://forum.snapcraft.io/t/modulenotfounderror-exception-for-a-snap-built-in-classic-confinement-mode/31090
+    override-build: |
+      snapcraftctl build
+      ln -sf ../usr/bin/python3.10 $SNAPCRAFT_PART_INSTALL/bin/python3
+    build-attributes:
+      - enable-patchelf
+    build-packages:
+      - rustc
+      - git
+      - cargo
+    stage-packages:
+      - git
+      - squashfs-tools
+      - python3-venv
+      - python3.12-minimal
+      - libpython3.12-minimal
+      - libpython3.12-stdlib

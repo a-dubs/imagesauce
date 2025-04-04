@@ -1,0 +1,172 @@
+################################# Project metadata ##############################
+
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ImageSauce"
+version = "0.0.1"
+description = "Wrapper around the Chimg CLI tool. One stop shop for customizing an image."
+authors = [
+    { name="a-dubs", email="alecwarren19@gmail.com" },
+]
+readme = "README.md"
+license = { file="LICENSE" }
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Operating System :: OS Independent",
+]
+
+################################ Dependencies #################################
+dependencies = [
+    "chimg @ git+https://github.com/canonical/chimg@main"
+]
+
+############################# Optional dependencies ###########################
+
+# dependencies that are only needed for development
+[project.optional-dependencies]
+dev = [
+    "ruff",
+    "mypy",
+    "tox-uv",
+]
+# dependencies that are only needed for testing
+test = [
+    "pytest",
+    "pytest-cov",
+    "pytest-mock",
+    "pytest-xdist",
+]
+
+############################# Setuptools configuration #########################
+
+[tool.setuptools]
+packages = ["ImageSauce"]  # List of modules to include in the distribution
+
+[project.scripts]
+# Entry points for the package
+ImageSauce = "ImageSauce.cli.__init__:main"  # Path to the main function in the cli module
+
+
+############################# Mypy configuration ##############################
+
+[tool.mypy]
+strict = "true"  # Enables all strict checks (equivalent to manually enabling multiple flags).
+follow_imports = "silent"  # Suppress import errors
+warn_unused_ignores = "true"  # Warn about unused "# type: ignore" comments
+warn_redundant_casts = "true"  # Detects redundant cast(...) calls.
+no_implicit_optional = "true"  # Disallow implicit optional types when a value is set to None by default
+check_untyped_defs = "true"  # Type-checks function bodies even if the function is not explicitly annotated.
+warn_return_any = "true"  # Warn if the return type is Any
+# Exclude specific files or directories from mypy checks
+exclude=[
+    "build/",  # Ignore build artifacts
+    "dist/",  # Ignore distribution files
+    "__pycache__/",  # Ignore Python bytecode cache
+    "venv/",  # Ignore virtual environments
+    ".*\\.egg-info/",  # Ignore egg metadata directories
+    # e.g "tests/*"  # Ignore tests directory
+]
+
+##### mypy: list of libaries to ignore stubs and typings for #####
+[[tool.mypy.overrides]]
+module = [
+    # e.g. "requests" or any other third-party library
+]
+ignore_missing_imports = "true"  # Suppresses errors for 
+# TODO: fix any modules that are included in this list
+[[tool.mypy.overrides]]
+check_untyped_defs = "false"  # Do NOT type-check function bodies if the function is not explicitly annotated.
+# add any files/dirs here that need to have type annotations added
+# and then remove them from this list once they have type annotation added later
+module = [
+    # e.g. "tests/*"
+]
+
+# mypy: placeholder overrides section
+# [[tool.mypy.overrides]]
+# module = [
+
+# ]
+# add any rule overrides here
+
+############################# Ruff configuration ##############################
+
+[tool.ruff]
+line-length = 120
+# target version is important, this will impact the suggestions given by ruff and it's Pyupgrade implementation
+target-version = "py38" 
+preview = true  # use rules that are "unstable and in preview"
+# files or dirs to exclude from linting checks
+exclude = [
+    # e.g "tests/*"
+    "build/",  # Ignore build artifacts
+    "dist/",  # Ignore distribution files
+    "__pycache__/",  # Ignore Python bytecode cache
+    "venv/",  # Ignore virtual environments
+    ".*\\.egg-info/",  # Ignore egg metadata directories
+]  
+
+[tool.ruff.lint]
+
+# Explicitly enable these ruff rules. See https://docs.astral.sh/ruff/rules/
+select = [
+    # Mandatory rules to adhere to (minimal effort but high impact)
+    "I",  # Ixxx: Isort (import) related issues | https://docs.astral.sh/ruff/rules/#isort-i
+    "F",  # Fxxx: Pyflakes checks (undefined names, unused imports) | https://docs.astral.sh/ruff/rules/#pyflakes-f
+    "COM",  # COMxxx: Trailing commas | https://docs.astral.sh/ruff/rules/#flake8-commas-com
+    "N",  # Nxxx: Naming conventions (snake_case, CamelCase, etc.)
+    "W",  # Wxxx: Pycodestyle warnings | https://docs.astral.sh/ruff/rules/#warning-w
+    "E",  # Exxx: Pycodestyle errors | https://docs.astral.sh/ruff/rules/#error-e
+    "UP",  # UPxxx: Pyupgrade suggestions | https://docs.astral.sh/ruff/rules/#pyupgrade-up
+    "PLE", # PLExxx: Pylint errors | https://docs.astral.sh/ruff/rules/#error-e_1
+    "PLW", # PLWxxx: Pylint warnings | https://docs.astral.sh/ruff/rules/#warning-w_1
+    "ANN", # ANNxxx: Type annotations (flake8-annotations) | https://docs.astral.sh/ruff/rules/#flake8-annotations-ann
+    "G",  # Gxxx: Logging string formatting | https://docs.astral.sh/ruff/rules/#flake8-logging-format-g,
+    "D",  # Dxxx: Pydocstyle (docstring) checks | https://docs.astral.sh/ruff/rules/#pydocstyle-d
+    "B904",  # flake8-bugbear "raise-without-from-inside-except" | https://docs.astral.sh/ruff/rules/raise-without-from-inside-except/#raise-without-from-inside-except-b904
+
+    # OPTIONAL: Enable pylint rules which are much more strict than the default ruff rules 
+    #   "PLC", # PLCxxx: Pylint conventions | https://docs.astral.sh/ruff/rules/#convention-c
+    #   "PLR", # PLCxxx: Pylint refactoring suggestions | https://docs.astral.sh/ruff/rules/#refactor-r
+
+    # OPTIONAL: Enable flake8 plugins for suggestions to reduce potential bugs and security issues
+    #   "B",  # Bxxx: Bugs and design issues (from `flake8-bugbear`) | https://docs.astral.sh/ruff/rules/#flake8-bugbear-b
+    #   "S",  # Sxxx: Security issues (from `flake8-bandit`) | https://docs.astral.sh/ruff/rules/#flake8-bandit-s
+]
+
+
+# Any ruff rules to ignore (e.g. "PLW2901"). See https://docs.astral.sh/ruff/rules/
+ignore = [
+  "COM812",  # Ignore this to prevent conflict with the ruff formatter
+  "D401",  # Disable non-imperative-mood pydocstyle rule
+]
+
+# Any ruff rules that ruff should avoid trying to auto fix 
+unfixable = [
+    # Add any ruff rules here that should not be auto-fixed
+    # e.g. "PLW2901"
+]
+
+# Ignore rules for specific files or directories (e.g. unit tests)
+[tool.ruff.lint.per-file-ignores]
+# assuming your tests directory is "./tests/"
+"tests/" = [
+    "D1",  # ignore D1XX pydocstyle "missing docstring" checks for tests 
+]
+
+
+############################ Pytest configuration #############################
+
+# set test paths
+[tool.pytest.ini_options]
+testpaths = ["tests/unit_tests"]
+markers = [
+    # "example_marker: mark a test as an example",
+]
+# adjust the coverage target(s) as needed
+addopts = "--cov=module1 --cov=module2 --cov-branch"

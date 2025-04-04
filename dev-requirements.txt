@@ -1,0 +1,7 @@
+ruff
+pytest
+pytest-cov
+pytest-xdist
+pytest-mock
+mypy
+tox-uv  # for MUCH faster env creation and switching
